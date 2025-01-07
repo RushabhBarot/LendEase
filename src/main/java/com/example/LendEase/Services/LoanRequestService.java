@@ -91,6 +91,16 @@ public class LoanRequestService {
         return convertToDTO(updatedLoanRequest);
     }
 
+    public void checkExpiredLoanRequests() {
+        LocalDateTime now = LocalDateTime.now();
+        List<LoanRequest> expiredRequests = loanRequestRepository.findByStatusAndExpiresAtBefore(LoanRequestStatus.PENDING, now);
+
+        for (LoanRequest request : expiredRequests) {
+            request.setStatus(LoanRequestStatus.CANCELLED);
+            loanRequestRepository.save(request);
+        }
+    }
+
     private LoanRequestDTO convertToDTO(LoanRequest loanRequest) {
         LoanRequestDTO dto = new LoanRequestDTO();
         dto.setId(loanRequest.getId());
