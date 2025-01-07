@@ -3,6 +3,7 @@ package com.example.LendEase.Entities;
 import com.example.LendEase.Entities.Enums.LoanRequestStatus;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ public class LoanRequest {
     private BigDecimal amount;
     private Integer durationInDays;
     private BigDecimal interestRate;
+    @CreationTimestamp
     private LocalDateTime createdAt;
     private LocalDateTime expiresAt;
     private LoanRequestStatus status;

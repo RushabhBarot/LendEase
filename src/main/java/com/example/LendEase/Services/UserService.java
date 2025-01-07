@@ -6,6 +6,7 @@ import com.example.LendEase.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,12 +63,18 @@ public class UserService {
         userDTO.setId(user.getId());
         userDTO.setUsername(user.getUsername());
         userDTO.setEmail(user.getEmail());
-        userDTO.setTransactionIds(user.getTransactions().stream()
+        userDTO.setTransactionIds(user.getTransactions() != null
+                ? user.getTransactions().stream()
                 .map(transaction -> transaction.getId())
-                .collect(Collectors.toList()));
-        userDTO.setLoanRequestIds(user.getLoanRequests().stream()
-                .map(loanRequest -> loanRequest.getId())
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())
+                : new ArrayList<>());
+        userDTO.setLoanRequestIds(
+                user.getLoanRequests() != null
+                        ? user.getLoanRequests().stream()
+                        .map(loanRequest -> loanRequest.getId())
+                        .collect(Collectors.toList())
+                        : new ArrayList<>()
+        );
         return userDTO;
     }
 }
