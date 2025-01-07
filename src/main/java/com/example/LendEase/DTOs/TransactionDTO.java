@@ -15,12 +15,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class TransactionDTO {
     private Long id;
-
-    private User user;
-    private LoanRequest loanRequest;
-
+    private Long lenderId;
+    private Long loanRequestId;
     private BigDecimal amount;
     private LocalDateTime transactionDate;
-    private TransactionType type;
-    private TransactionStatus status;
+    private LocalDateTime dueDate;
+    private String status;
 }

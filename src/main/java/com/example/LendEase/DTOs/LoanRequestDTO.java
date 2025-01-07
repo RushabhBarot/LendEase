@@ -13,16 +13,12 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequestDTO {
+public class LoanRequestDTO {
     private Long id;
-
+    private Long borrowerId;
     private BigDecimal amount;
+    private Integer durationInDays;
     private BigDecimal interestRate;
-    private Integer durationInMonths;
     private LocalDateTime createdAt;
-    private RequestType type;
-    private RequestStatus status;
-
-    private Pool pool;
-    private User user;
+    private String status;
 }
