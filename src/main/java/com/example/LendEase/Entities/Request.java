@@ -26,4 +26,8 @@ public class Request {
     private RequestType type;
     private LocalDateTime createdAt;
     private RequestStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "pool_id")
+    private Pool pool;
 }
