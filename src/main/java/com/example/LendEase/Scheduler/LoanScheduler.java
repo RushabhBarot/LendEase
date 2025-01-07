@@ -18,6 +18,6 @@ public class LoanScheduler {
     @Scheduled(cron = "0 0 * * * *") // Run every hour
     public void checkLoans() {
         loanRequestService.checkExpiredLoanRequests();
-
+        transactionService.checkCompletedTransactions();
     }
 }
