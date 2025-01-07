@@ -2,11 +2,14 @@ package com.example.LendEase.Services;
 
 import com.example.LendEase.DTOs.LoanRequestDTO;
 import com.example.LendEase.Entities.Enums.LoanRequestStatus;
+import com.example.LendEase.Entities.Enums.TransactionStatus;
 import com.example.LendEase.Entities.LoanRequest;
+import com.example.LendEase.Entities.Transaction;
 import com.example.LendEase.Entities.User;
 import com.example.LendEase.Repositories.LoanRequestRepository;
 import com.example.LendEase.Repositories.TransactionRepository;
 import com.example.LendEase.Repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +62,34 @@ public class LoanRequestService {
         return pendingRequests.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
+
+    @Transactional
+    public LoanRequestDTO acceptLoanRequest(Long loanRequestId, Long lenderId) {
+        LoanRequest loanRequest = loanRequestRepository.findById(loanRequestId)
+                .orElseThrow(() -> new RuntimeException("Loan request not found"));
+
+        User lender = userRepository.findById(lenderId)
+                .orElseThrow(() -> new RuntimeException("Lender not found"));
+
+        if (loanRequest.getStatus() != LoanRequestStatus.PENDING) {
+            throw new RuntimeException("Loan request is not available for acceptance");
+        }
+
+        loanRequest.setStatus(LoanRequestStatus.ACCEPTED);
+        LoanRequest updatedLoanRequest = loanRequestRepository.save(loanRequest);
+
+        Transaction transaction = new Transaction();
+        transaction.setLender(lender);
+        transaction.setLoanRequest(updatedLoanRequest);
+        transaction.setAmount(updatedLoanRequest.getAmount());
+        transaction.setTransactionDate(LocalDateTime.now());
+        transaction.setDueDate(transaction.getTransactionDate().plusDays(updatedLoanRequest.getDurationInDays()));
+        transaction.setStatus(TransactionStatus.ACTIVE);
+
+        transactionRepository.save(transaction);
+
+        return convertToDTO(updatedLoanRequest);
+    }
 
     private LoanRequestDTO convertToDTO(LoanRequest loanRequest) {
         LoanRequestDTO dto = new LoanRequestDTO();

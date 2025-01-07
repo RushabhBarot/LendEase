@@ -32,4 +32,10 @@ public class LoanRequestController {
         List<LoanRequestDTO> pendingRequests = loanRequestService.getPendingLoanRequests();
         return ResponseEntity.ok(pendingRequests);
     }
+
+    @PostMapping("/{id}/accept")
+    public ResponseEntity<LoanRequestDTO> acceptLoanRequest(@PathVariable Long id, @RequestParam Long lenderId) {
+        LoanRequestDTO acceptedLoanRequest = loanRequestService.acceptLoanRequest(id, lenderId);
+        return ResponseEntity.ok(acceptedLoanRequest);
+    }
 }
