@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("requests")
 public class LoanRequestController {
@@ -23,5 +25,11 @@ public class LoanRequestController {
     public ResponseEntity<LoanRequestDTO> getLoanRequest(@PathVariable Long id) {
         LoanRequestDTO loanRequest = loanRequestService.getLoanRequestById(id);
         return ResponseEntity.ok(loanRequest);
+    }
+
+    @GetMapping("/pending")
+    public ResponseEntity<List<LoanRequestDTO>> getPendingLoanRequests() {
+        List<LoanRequestDTO> pendingRequests = loanRequestService.getPendingLoanRequests();
+        return ResponseEntity.ok(pendingRequests);
     }
 }
