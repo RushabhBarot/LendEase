@@ -13,5 +13,5 @@ public class Pool {
     private Long id;
 
     @OneToMany(mappedBy = "pool")
-    private List<Request> requests;
+    private List<LoanRequest> requests;
 }

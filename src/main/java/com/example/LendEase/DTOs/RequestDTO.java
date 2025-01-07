@@ -1,8 +1,6 @@
 package com.example.LendEase.DTOs;
 
 
-import com.example.LendEase.Entities.Enums.RequestStatus;
-import com.example.LendEase.Entities.Enums.RequestType;
 import com.example.LendEase.Entities.Pool;
 import com.example.LendEase.Entities.User;
 import lombok.AllArgsConstructor;

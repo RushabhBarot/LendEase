@@ -20,5 +20,5 @@ public class User {
     private List<Transaction> transactions;
 
     @OneToMany(mappedBy = "user")
-    private List<Request> requests;
+    private List<LoanRequest> loanRequests;
 }

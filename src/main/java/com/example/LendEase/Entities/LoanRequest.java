@@ -1,7 +1,6 @@
 package com.example.LendEase.Entities;
 
-import com.example.LendEase.Entities.Enums.RequestStatus;
-import com.example.LendEase.Entities.Enums.RequestType;
+import com.example.LendEase.Entities.Enums.LoanRequestStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,24 +9,25 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-public class Request {
-
+public class LoanRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "borrower_id")
+    private User borrower;
 
     private BigDecimal amount;
-    private Integer durationInMonths;
+    private Integer durationInDays;
     private BigDecimal interestRate;
-    private RequestType type;
     private LocalDateTime createdAt;
-    private RequestStatus status;
+    private LocalDateTime expiresAt;
+    private LoanRequestStatus status;
 
     @ManyToOne
     @JoinColumn(name = "pool_id")
     private Pool pool;
+
+
 }

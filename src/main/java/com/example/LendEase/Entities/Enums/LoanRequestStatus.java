@@ -1,5 +1,5 @@
 package com.example.LendEase.Entities.Enums;
 
-public enum RequestStatus {
+public enum LoanRequestStatus {
     PENDING, ACCEPTED, COMPLETED, CANCELLED
 }

@@ -1,8 +1,7 @@
 package com.example.LendEase.DTOs;
 
 import com.example.LendEase.Entities.Enums.TransactionStatus;
-import com.example.LendEase.Entities.Enums.TransactionType;
-import com.example.LendEase.Entities.Request;
+import com.example.LendEase.Entities.LoanRequest;
 import com.example.LendEase.Entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +17,7 @@ public class TransactionDTO {
     private Long id;
 
     private User user;
-    private Request request;
+    private LoanRequest loanRequest;
 
     private BigDecimal amount;
     private LocalDateTime transactionDate;

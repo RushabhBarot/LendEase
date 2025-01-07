@@ -1,7 +1,6 @@
 package com.example.LendEase.Entities;
 
 import com.example.LendEase.Entities.Enums.TransactionStatus;
-import com.example.LendEase.Entities.Enums.TransactionType;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -18,7 +17,7 @@ public class Transaction {
 
     @OneToOne
     @JoinColumn(name = "request_id")
-    private Request request;
+    private LoanRequest loanRequest;
 
     private BigDecimal amount;
     private LocalDateTime transactionDate;
