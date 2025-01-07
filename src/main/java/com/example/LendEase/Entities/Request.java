@@ -3,10 +3,13 @@ package com.example.LendEase.Entities;
 import com.example.LendEase.Entities.Enums.RequestStatus;
 import com.example.LendEase.Entities.Enums.RequestType;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Entity
+@Data
 public class Request {
 
     @Id
