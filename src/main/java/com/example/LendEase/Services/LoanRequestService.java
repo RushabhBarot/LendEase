@@ -46,6 +46,13 @@ public class LoanRequestService {
         return convertToDTO(savedLoanRequest);
     }
 
+    public LoanRequestDTO getLoanRequestById(Long id) {
+        LoanRequest loanRequest = loanRequestRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Loan request not found"));
+        return convertToDTO(loanRequest);
+    }
+
+
     private LoanRequestDTO convertToDTO(LoanRequest loanRequest) {
         LoanRequestDTO dto = new LoanRequestDTO();
         dto.setId(loanRequest.getId());
