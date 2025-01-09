@@ -38,6 +38,13 @@ public class TransactionService {
         return convertToDTO(transaction);
     }
 
+    public List<TransactionDTO> getAllTransactions() {
+        // Fetch all transactions from the repository and convert to DTOs
+        return transactionRepository.findAll().stream()
+                .map(transaction -> convertToDTO(transaction))
+                .toList();
+    }
+
     private TransactionDTO convertToDTO(Transaction transaction) {
         TransactionDTO dto = new TransactionDTO();
         dto.setId(transaction.getId());

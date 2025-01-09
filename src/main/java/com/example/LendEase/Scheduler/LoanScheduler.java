@@ -15,9 +15,10 @@ public class LoanScheduler {
     @Autowired
     private TransactionService transactionService;
 
-    @Scheduled(cron = "0 0 * * * *") // Run every hour
+    @Scheduled(cron = "0 */1 * * * *") // Run every 1 minute
     public void checkLoans() {
         loanRequestService.checkExpiredLoanRequests();
         transactionService.checkCompletedTransactions();
     }
+
 }
