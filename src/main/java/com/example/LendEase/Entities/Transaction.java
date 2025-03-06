@@ -51,20 +51,12 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    public LocalDateTime getDueDate() {
-        return dueDate;
+    public User getBorrower() {
+        return borrower;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public TransactionStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(TransactionStatus status) {
-        this.status = status;
+    public void setBorrower(User borrower) {
+        this.borrower = borrower;
     }
 
     @Id
@@ -75,13 +67,14 @@ public class Transaction {
     @JoinColumn(name = "lender_id")
     private User lender;
 
+    @ManyToOne
+    @JoinColumn(name = "borrower_id")
+    private User borrower;
+
     @OneToOne
     @JoinColumn(name = "loan_request_id")
     private LoanRequest loanRequest;
 
     private BigDecimal amount;
     private LocalDateTime transactionDate;
-    private LocalDateTime dueDate;
-    private TransactionStatus status;
-
 }

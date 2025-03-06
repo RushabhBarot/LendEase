@@ -1,8 +1,5 @@
 package com.example.LendEase.DTOs;
 
-import com.example.LendEase.Entities.Enums.TransactionStatus;
-import com.example.LendEase.Entities.LoanRequest;
-import com.example.LendEase.Entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

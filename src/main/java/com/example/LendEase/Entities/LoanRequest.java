@@ -19,14 +19,44 @@ public class LoanRequest {
     @JoinColumn(name = "borrower_id")
     private User borrower;
 
+    @ManyToOne
+    @JoinColumn(name = "lender_id")
+    private  User lender = null;
+
     private BigDecimal amount;
-    private Integer durationInDays;
+
+    public Transaction getForward() {
+        return forward;
+    }
+
+    public void setForward(Transaction forward) {
+        this.forward = forward;
+    }
+
+    public Transaction getPayBack() {
+        return payBack;
+    }
+
+    public void setPayBack(Transaction payBack) {
+        this.payBack = payBack;
+    }
+
+    private Integer durationInMonths;
     private BigDecimal interestRate;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
-    private LocalDateTime expiresAt;
     private LoanRequestStatus status;
 
+    private BigDecimal amountToPay = null;
+
+    @OneToOne
+    @JoinColumn(name = "forward")
+    private Transaction forward=null;
+
+    @OneToOne
+    @JoinColumn(name = "payBack")
+    private Transaction payBack=null;
     public Long getId() {
         return id;
     }
@@ -51,13 +81,7 @@ public class LoanRequest {
         this.amount = amount;
     }
 
-    public Integer getDurationInDays() {
-        return durationInDays;
-    }
 
-    public void setDurationInDays(Integer durationInDays) {
-        this.durationInDays = durationInDays;
-    }
 
     public BigDecimal getInterestRate() {
         return interestRate;
@@ -75,13 +99,6 @@ public class LoanRequest {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getExpiresAt() {
-        return expiresAt;
-    }
-
-    public void setExpiresAt(LocalDateTime expiresAt) {
-        this.expiresAt = expiresAt;
-    }
 
     public LoanRequestStatus getStatus() {
         return status;
@@ -97,6 +114,30 @@ public class LoanRequest {
 
     public void setPool(Pool pool) {
         this.pool = pool;
+    }
+
+    public User getLender() {
+        return lender;
+    }
+
+    public void setLender(User lender) {
+        this.lender = lender;
+    }
+
+    public Integer getDurationInMonths() {
+        return durationInMonths;
+    }
+
+    public void setDurationInMonths(Integer durationInMonths) {
+        this.durationInMonths = durationInMonths;
+    }
+
+    public BigDecimal getAmountToPay() {
+        return amountToPay;
+    }
+
+    public void setAmountToPay(BigDecimal amountToPay) {
+        this.amountToPay = amountToPay;
     }
 
     @ManyToOne

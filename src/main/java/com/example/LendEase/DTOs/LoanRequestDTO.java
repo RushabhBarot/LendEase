@@ -1,8 +1,6 @@
 package com.example.LendEase.DTOs;
 
 
-import com.example.LendEase.Entities.Pool;
-import com.example.LendEase.Entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,10 +24,12 @@ public class LoanRequestDTO {
 
     private Long borrowerId;
     private BigDecimal amount;
-    private Integer durationInDays;
+    private Integer durationInMonths;
     private BigDecimal interestRate;
     private LocalDateTime createdAt;
     private String status;
+
+    private BigDecimal amountToPay = null;
 
     public BigDecimal getAmount() {
         return amount;
@@ -47,16 +47,26 @@ public class LoanRequestDTO {
         this.amount = amount;
     }
 
-    public Integer getDurationInDays() {
-        return durationInDays;
-    }
 
-    public void setDurationInDays(Integer durationInDays) {
-        this.durationInDays = durationInDays;
-    }
 
     public BigDecimal getInterestRate() {
         return interestRate;
+    }
+
+    public Integer getDurationInMonths() {
+        return durationInMonths;
+    }
+
+    public void setDurationInMonths(Integer durationInMonths) {
+        this.durationInMonths = durationInMonths;
+    }
+
+    public BigDecimal getAmountToPay() {
+        return amountToPay;
+    }
+
+    public void setAmountToPay(BigDecimal amountToPay) {
+        this.amountToPay = amountToPay;
     }
 
     public void setInterestRate(BigDecimal interestRate) {

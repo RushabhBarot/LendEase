@@ -1,7 +1,7 @@
 package com.example.LendEase.Controllers;
 
 import com.example.LendEase.DTOs.UserDTO;
-import com.example.LendEase.Entities.User;
+import com.example.LendEase.Services.DashboardService;
 import com.example.LendEase.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +16,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
     // Create a new user
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
         UserDTO createdUser = userService.createUser(userDTO);
+
         return ResponseEntity.ok(createdUser);
     }
 

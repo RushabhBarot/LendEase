@@ -12,5 +12,13 @@ import java.util.List;
 public interface LoanRequestRepository extends JpaRepository<LoanRequest,Long> {
     List<LoanRequest> findByStatus(LoanRequestStatus loanRequestStatus);
 
-    List<LoanRequest> findByStatusAndExpiresAtBefore(LoanRequestStatus loanRequestStatus, LocalDateTime now);
+    List<LoanRequest> findByStatusAndCreatedAtBefore(LoanRequestStatus loanRequestStatus, LocalDateTime now);
+
+    List<LoanRequest> findByBorrowerIdAndPayBackIsNull(Long borrowerId);
+
+    List<LoanRequest> findByLenderIdAndPayBackIsNull(Long lenderId);
+
+    List<LoanRequest> findByLenderId(Long lenderId);
+
+    List<LoanRequest> findByBorrowerId(Long borrowerId);
 }

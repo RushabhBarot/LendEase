@@ -33,9 +33,22 @@ public class LoanRequestController {
         return ResponseEntity.ok(pendingRequests);
     }
 
-    @PostMapping("/{borrowerId}/accept/{lenderId}")
-    public ResponseEntity<LoanRequestDTO> acceptLoanRequest(@PathVariable Long borrowerId, @PathVariable Long lenderId) {
-        LoanRequestDTO acceptedLoanRequest = loanRequestService.acceptLoanRequest(borrowerId, lenderId);
+//    @GetMapping("/cancelled")
+//    public ResponseEntity<List<LoanRequestDTO>> getCancelledLoanRequests() {
+//        List<LoanRequestDTO> cancelledRequests = loanRequestService.getCancelledLoanRequests();
+//        return ResponseEntity.ok(cancelledRequests);
+//    }
+
+    @PostMapping("/{loanRequestId}/accept/{lenderId}")
+    public ResponseEntity<LoanRequestDTO> acceptLoanRequest(@PathVariable Long loanRequestId, @PathVariable Long lenderId) {
+        LoanRequestDTO acceptedLoanRequest = loanRequestService.acceptLoanRequest(loanRequestId, lenderId);
         return ResponseEntity.ok(acceptedLoanRequest);
     }
+
+    @PostMapping("/{loanRequestId}/repay/{borrowerId}")
+    public ResponseEntity<LoanRequestDTO> repayLoan(@PathVariable Long loanRequestId, @PathVariable Long borrowerId) {
+        LoanRequestDTO acceptedLoanRequest = loanRequestService.repayLoan(loanRequestId, borrowerId);
+        return ResponseEntity.ok(acceptedLoanRequest);
+    }
+
 }

@@ -15,6 +15,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private DashboardService dashboardService;
+
 
     // Method to create a new user
     public UserDTO createUser(UserDTO userDTO) {
@@ -23,6 +26,7 @@ public class UserService {
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
         User savedUser = userRepository.save(user);
+        dashboardService.initializeUserDashboard(savedUser.getId());
         return mapToDTO(savedUser);
     }
 
