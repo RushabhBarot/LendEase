@@ -3,6 +3,8 @@ package com.example.LendEase.Repositories;
 import com.example.LendEase.Entities.Enums.LoanRequestStatus;
 import com.example.LendEase.Entities.LoanRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.NativeQuery;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -21,4 +23,8 @@ public interface LoanRequestRepository extends JpaRepository<LoanRequest,Long> {
     List<LoanRequest> findByLenderId(Long lenderId);
 
     List<LoanRequest> findByBorrowerId(Long borrowerId);
+
+    @NativeQuery("select * from loan_request where (borrowerId=?1 or lenderId=?1) and payBack=null")
+    List<LoanRequest>getAllPendindLoan(Long userId);
+
 }

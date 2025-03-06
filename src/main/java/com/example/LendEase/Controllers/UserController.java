@@ -1,5 +1,6 @@
 package com.example.LendEase.Controllers;
 
+import com.example.LendEase.DTOs.LoginDTO;
 import com.example.LendEase.DTOs.UserDTO;
 import com.example.LendEase.Services.DashboardService;
 import com.example.LendEase.Services.UserService;
@@ -31,6 +32,14 @@ public class UserController {
         UserDTO userDTO = userService.getUserById(id);
         return ResponseEntity.ok(userDTO);
     }
+
+
+    @PostMapping("/signin")
+    public ResponseEntity<UserDTO> signIn(@RequestBody LoginDTO userDTO) {
+        UserDTO userDTO1=userService.getUserByUsernameAndPass(userDTO.getUsername(), userDTO.getPassword());
+        return ResponseEntity.ok(userDTO1);
+    }
+
 
     // Get all users
     @GetMapping

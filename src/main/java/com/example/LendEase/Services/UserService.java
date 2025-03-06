@@ -37,6 +37,12 @@ public class UserService {
         return mapToDTO(user);
     }
 
+    public UserDTO getUserByUsernameAndPass(String username , String password) {
+        User user=userRepository.findByUsernameAndPassword(username, password).orElseThrow(() -> new RuntimeException("User not found"));
+
+        return mapToDTO(user);
+    }
+
     // Method to get all users
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()
